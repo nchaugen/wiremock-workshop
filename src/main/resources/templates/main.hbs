@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+</head>
+
+<body>
+<h1>{{title}}</h1>
+<h2>Tap into the local chatter</h2>
+<form action="/" id="searchForm">
+    <input type="text" name="place" placeholder="Search for a place..." value="{{place-term}}"/>
+    <input type="submit" id="searchButton" value="Search"/>
+</form>
+
+
+<div id="places">
+    {{#with places}}
+    <ul>
+        {{#each geonames}}
+        <li><a href="/?name={{name}}&adminName={{adminName1}}&countryName={{countryName}}&lat={{lat}}&lng={{lng}}">
+            {{name}}, {{adminName1}}, {{countryName}}</a></li>
+        {{else}}
+        <p class="empty">No hits!</p>
+        {{/each}}
+    </ul>
+    {{/with}}
+</div>
+
+{{#if tweets}}
+<div id="tweets">
+    <h2>Current chatter in {{name}}, {{adminName}}, {{countryName}}</h2>
+    {{#with tweets}}
+    <ul>
+        {{#each statuses}}
+        <li>{{user.name}} (@{{user.screen_name}}):<br>{{text}}</li>
+        {{else}}
+        <p class="empty">No buzz!</p>
+        {{/each}}
+    </ul>
+    {{/with}}
+</div>
+{{/if}}
+
+</body>
+</html>
